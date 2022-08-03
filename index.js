@@ -602,9 +602,10 @@ const saveAsHtml = async ({ page, filePath, options, route, fs }) => {
   let content = await page.content();
   content = content.replace(/react-snap-onload/g, "onload");
   const title = await page.title();
-  const minifiedContent = options.minifyHtml
+  let minifiedContent = options.minifyHtml
     ? minify(content, options.minifyHtml)
     : content;
+  minifiedContent = minifiedContent.replace(/<div class="container py-4">.*?<\/footer><\/div>/, "");
   filePath = filePath.replace(/\//g, path.sep);
   if (route.endsWith(".html")) {
     if (route.endsWith("/404.html") && !title.includes("404"))
