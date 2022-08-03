@@ -605,7 +605,7 @@ const saveAsHtml = async ({ page, filePath, options, route, fs }) => {
   let minifiedContent = options.minifyHtml
     ? minify(content, options.minifyHtml)
     : content;
-  minifiedContent = minifiedContent.replace(/<div class="container py-4">.*?<\/footer><\/div>/, "");
+  minifiedContent = minifiedContent.replace(/<div class="container py-4.*?<\/footer><\/div>/, "");
   filePath = filePath.replace(/\//g, path.sep);
   if (route.endsWith(".html")) {
     if (route.endsWith("/404.html") && !title.includes("404"))
